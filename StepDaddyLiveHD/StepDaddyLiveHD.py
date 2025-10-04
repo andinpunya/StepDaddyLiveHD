@@ -24,7 +24,11 @@ class State(rx.State):
         self.search_query = value
 
 
-@rx.page("/", on_load=State.on_load)
+@rx.page(
+    route="/",
+    title="Daddy Live Proxy",
+    description="A proxy for Daddy Live streams",
+)
 def index() -> rx.Component:
     return rx.box(
         navbar(
