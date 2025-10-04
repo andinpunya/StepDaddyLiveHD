@@ -1,6 +1,6 @@
 docker build \
   --build-arg PORT=3000 \
-  --build-arg API_URL=https://urban-disco-699xwjq967pxh5q6r-3000.app.github.dev \
+  --build-arg API_URL=https://refactored-disco-v66jwx964jqq2p74x-3000.app.github.dev \
   --build-arg PROXY_CONTENT=false \
   --build-arg SOCKS5=efhjfxos:fqzez23px4o5@142.111.48.253:7030 \
   -t step-daddy-live-hd .
