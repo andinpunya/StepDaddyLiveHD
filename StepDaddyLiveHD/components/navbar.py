@@ -1,9 +1,7 @@
-from pyexpat.errors import XML_ERROR_INVALID_ARGUMENT
-
 import reflex as rx
-from pygments.styles.dracula import background
 
-from rxconfig import config
+# Branding khusus untuk tampilan (bukan app_name Reflex)
+SITE_TITLE = "TipiLiveHD"
 
 
 def navbar_icons_item(text: str, icon: str, url: str, external: bool = False) -> rx.Component:
@@ -32,20 +30,19 @@ def navbar_icons_menu_item(text: str, icon: str, url: str, external: bool = Fals
 def navbar(search=None) -> rx.Component:
     return rx.box(
         rx.card(
+            # ✅ Navbar desktop
             rx.desktop_only(
                 rx.hstack(
                     rx.vstack(
-                        rx.text(
-                            config.app_name, size="8", weight="bold"
-                        ),
+                        rx.text(SITE_TITLE, size="8", weight="bold"),  # pakai branding
                         rx.box(
-                            background_color="#fa5252",
+                            background_color="#a952fa",
                             width="100%",
                             padding="2.5px",
                         ),
                         align_items="center",
                         gap="0",
-                        on_click=rx.redirect("/")
+                        on_click=rx.redirect("/"),
                     ),
                     rx.cond(
                         search,
@@ -62,20 +59,24 @@ def navbar(search=None) -> rx.Component:
                     rx.hstack(
                         navbar_icons_item("Schedule", "calendar-sync", "/schedule"),
                         navbar_icons_item("playlist.m3u8", "file-down", "/playlist"),
-                        navbar_icons_item("Github", "github", "https://github.com/gookie-dev/StepDaddyLiveHD", True),
+                        navbar_icons_item(
+                            "Github",
+                            "github",
+                            "https://github.com/gookie-dev/StepDaddyLiveHD",
+                            True,
+                        ),
                         spacing="6",
                     ),
                     justify=rx.breakpoints(initial="between"),
                     align_items="center",
                 ),
             ),
+            # ✅ Navbar mobile & tablet
             rx.mobile_and_tablet(
                 rx.vstack(
                     rx.hstack(
                         rx.vstack(
-                            rx.text(
-                                config.app_name, size="7", weight="bold"
-                            ),
+                            rx.text(SITE_TITLE, size="7", weight="bold"),  # pakai branding
                             rx.box(
                                 background_color="#fa5252",
                                 width="100%",
@@ -83,23 +84,22 @@ def navbar(search=None) -> rx.Component:
                             ),
                             align_items="center",
                             gap="0",
-                            on_click=rx.redirect("/")
+                            on_click=rx.redirect("/"),
                         ),
                         rx.tablet_only(
-                            rx.cond(
-                                search,
-                                search,
-                                rx.fragment(),
-                            ),
+                            rx.cond(search, search, rx.fragment()),
                         ),
                         rx.menu.root(
-                            rx.menu.trigger(
-                                rx.icon("menu", size=30)
-                            ),
+                            rx.menu.trigger(rx.icon("menu", size=30)),
                             rx.menu.content(
                                 navbar_icons_menu_item("Schedule", "calendar-sync", "/schedule"),
                                 navbar_icons_menu_item("playlist.m3u8", "file-down", "/playlist"),
-                                navbar_icons_menu_item("Github", "github", "https://github.com/gookie-dev/StepDaddyLiveHD", True),
+                                navbar_icons_menu_item(
+                                    "Github",
+                                    "github",
+                                    "https://github.com/gookie-dev/StepDaddyLiveHD",
+                                    True,
+                                ),
                             ),
                             justify="end",
                         ),
@@ -110,10 +110,7 @@ def navbar(search=None) -> rx.Component:
                     rx.cond(
                         search,
                         rx.mobile_only(
-                            rx.box(
-                                search,
-                                width="100%",
-                            ),
+                            rx.box(search, width="100%"),
                             width="100%",
                         ),
                         rx.fragment(),
